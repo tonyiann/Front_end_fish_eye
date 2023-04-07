@@ -8,14 +8,14 @@ function mediaFactory(data) {
     console.log("picture:", picture)
     const movie = `assets/catalogue/${photographerId}/${video}`;
 
-    const profil = `assets/photographers/${photographerId}/${portrait}`;
+    // const profil = `assets/photographers/${photographerId}/${portrait}`;
     
-    const nom = `data/photographers.json/${name}`;
-    console.log("name :" ,name)
+    // const nom = `data/photographers.json/${name}`;
+    // console.log("name :" ,name)
     
-    const local = `data/photographers.json/${localisation}`;
+    // const local = `data/photographers.json/${localisation}`;
 
-    const slogan = `data/photographers.json/${tagline}`;
+    // const slogan = `data/photographers.json/${tagline}`;
 
 
     
@@ -26,11 +26,13 @@ function mediaFactory(data) {
 
     function getMediaCardDOM() {
         const article = document.createElement('article');
+        article.setAttribute('class','mediaCard');
         const photo = document.createElement('div');
+        photo.setAttribute('class','mediaCard--img')
 
-        const nom = document.createElement( 'h2' );
-        console.log("h2:",h2)
-        nom.textContent = name;
+        // const nom = document.createElement( 'h2' );
+        // console.log("h2:",h2)
+        // nom.textContent = name;
         
 
         console.log("image :",image)
@@ -49,9 +51,23 @@ function mediaFactory(data) {
             photo.appendChild(img)
 
          }
+
+        const info = document.createElement('div');
+        info.setAttribute('class','mediaCard--info')
+        
+        const titrePhoto = document.createElement('h3');
+        titrePhoto.setAttribute('class', 'mediaCard--info--titre')
+
+        titrePhoto.textContent = title;
+
+        info.appendChild(titrePhoto)
+
+
+
+
          console.log("photo:",photo)
          article.appendChild(photo);
-         article.appendChild(img);
+         article.appendChild(info)
          
 
          return article;

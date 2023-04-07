@@ -74,3 +74,70 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+.photograph-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
+}
+.photograph-info img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.mediaDisplay{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.mediaCard{
+    width: 450px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: 40px
+}
+
+.mediaCard--img{
+    height: 85%;
+    width: 100%;
+}
+
+.mediaCard--img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.mediaCard--img video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.mediaCard--info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 15%;
+    width: 450px;
+    margin-top: 20px;
+}
+
+.mediaCard--info--titre{
+    height: 100%;
+    width: 90%;
+    font-size: 25px;
+    color: #5d0b0b;
+    font-weight: lighter;
+}
