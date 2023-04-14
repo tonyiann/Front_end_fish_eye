@@ -1,14 +1,19 @@
-const idPhotographer = new URL(document.location).searchParams.get("id");
+// const idPhotographer = new URL(document.location).searchParams.get("id");
+//Récupération de l'id du photographe dans l'url
+const queryString_url_id = window.location.search;
+//Extraction de l'id
+const urlsearchParams = new URLSearchParams(queryString_url_id);
+const idPhotographer = urlsearchParams.get('id');
 
 
-async function getPhotographer(id) {
+async function getPhotographer() {
   const photographers = await fetch('data/photographers.json')
     .then(res => res.json())
     .then(res => res.photographers)
     .catch(err => console.log('Un probléme est survenu', err));
 
-  var photographer = photographers.find(element => element.id == idPhotographer)
-  return photographer;
+  // var photographer = photographers.find(element => element.id == idPhotographer)
+  return photographers;
 }
 
 async function displayPhotographeMedia(medias) {
@@ -21,7 +26,6 @@ async function displayPhotographeMedia(medias) {
       if (data.photographerId == idPhotographer) {
         const media = mediaFactory(data);
         const mediaCardDom = media.getMediaCardDOM();
-        console.log("mediaCardDom :",mediaCardDom)
         mediaSection.appendChild(mediaCardDom);
 
       }
@@ -29,31 +33,27 @@ async function displayPhotographeMedia(medias) {
 
 }
 
-function displayData(photographer) {
+function displayData(photographers) {
+
+  const photographer = photographers.filter((obj) => obj.id == idPhotographer);
+
+  console.log('nom:',photographer)
+  console.log('blase:',photographer[0].name)
   const name = document.getElementById("photographeName");
-  name.innerHTML = photographer.name;
+  name.innerHTML = photographer[0].name;
 
 
   const location = document.getElementById("photographeLocalisation");
-  location.innerHTML = photographer.city + ', ' + photographer.country;
+  location.innerHTML = photographer[0].city + ', ' + photographer[0].country;
 
   const slogan = document.getElementById("photographeSlogan");
-  slogan.innerHTML = photographer.tagline;
+  slogan.innerHTML = photographer[0].tagline;
 
   const image = document.getElementById("photographeImage");
-  image.src = "assets/photographers/" + photographer.portrait;
+  image.src = "assets/photographers/" + photographer[0].portrait;
   console.log(image)
 
-  // const galerieDiv = document.getElementById("photosCatalogue");
-  // galerieDiv.innerHTML = "";
-  // console.log("filteredMedia: ", filteredMedia)
-  // filteredMedia.forEach((media) => {
-  //   const photo = document.createElement("img");
-  //   photo.src = "assets/catalogue/" + media.image;
-  //   photo.alt = media.title;
-  //   galerieDiv.appendChild(photo);
-  //   console.log(image);
-  // });
+  
 }
 
 async function getMedias() {
@@ -89,13 +89,14 @@ dropdown.addEventListener("change", function() {
 });
 
 
+
+
 async function init() {
   console.log("init")
-  const photographer = await getPhotographer(idPhotographer);
+  const photographers = await getPhotographer();
   const { media } = await getMedias();
-  displayData(photographer);
+  displayData(photographers);
   displayPhotographeMedia(media);
-  // displayData(photographer, filteredMedia);
 }
 
 init();
